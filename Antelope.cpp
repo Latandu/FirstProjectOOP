@@ -3,7 +3,7 @@
 //
 
 #include "Antelope.h"
-#define antelopeSymbol '^'
+#define antelopeSymbol 'A'
 Antelope::Antelope() {
     this->strength = 4;
     this->initiative = 4;

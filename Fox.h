@@ -7,6 +7,8 @@
 
 #include "Animal.h"
 class Fox : public Animal {
+protected:
+    void Action() override;
 public:
     Fox();
 };

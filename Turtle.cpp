@@ -3,7 +3,7 @@
 //
 
 #include "Turtle.h"
-#define turtleSymbol '%'
+#define turtleSymbol 'T'
 Turtle::Turtle() {
     this->strength = 2;
     this->initiative = 1;

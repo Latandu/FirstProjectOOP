@@ -9,39 +9,48 @@
 #include <iostream>
 class World;
 class Organism {
-  //  friend class Animal;
 protected:
-    Organism(int strength, int initiative, Point point, World *world);
     int strength = 0;
     int initiative = 0;
+    int age = 0;
+    bool roundDone = false;
+public:
+protected:
     char symbol = '*';
     Point point;
     std::string animalName;
-public:
-    const std::string &getAnimalName() const;
-
-    void setAnimalName(const std::string &animalName);
-
-protected:
-    World* world;
-public:
-    Organism() = default;
-    virtual ~Organism() = default;
-    virtual void Action() = 0;
-    virtual void Collision() = 0;
+    virtual int Collision(Point& point) = 0;
     virtual char Draw();
-    virtual char getSymbol() const;
+
+    const Point &getPoint() const;
+    void setStrength(int strength);
+    void setInitiative(int initiative);
+    void setSymbol(char symbol);
+    void setAnimalName(const std::string &animalName);
+    const std::string &getAnimalName() const;
+public:
+    World* world{};
+    Organism(int strength, int initiative, Point point, bool roundDone, int age);
+    World *getWorld() const;
+
+    void setWorld(World *world);
     int getStrength() const;
+    void setAge(int age);
+
+    Organism() = default;
+    virtual char getSymbol() const;
+
+    virtual ~Organism() = default;
+
+    virtual void Action() = 0;
+
+    void setRoundDone(bool roundDone);
+
+    int getAge() const;
 
     int getInitiative() const;
 
-    const Point &getPoint() const;
-
-    void setStrength(int strength);
-
-    void setInitiative(int initiative);
-
-    void setSymbol(char symbol);
+    bool isRoundDone() const;
 
     void setPoint(int x, int y);
 };

@@ -3,7 +3,7 @@
 //
 
 #include "Sheep.h"
-#define sheepSymbol '#'
+#define sheepSymbol 'E'
 Sheep::Sheep() {
     this->initiative = 4;
     this->strength = 4;

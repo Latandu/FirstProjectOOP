@@ -18,15 +18,20 @@ protected:
     Organism* organisms;
     vector<Organism*> organismVector;
 public:
+    int numberOfRounds = 0;
     World(int rows, int columns);
     void makeTurn();
+
+    const vector<Organism *> &getOrganismVector() const;
+
+    void setOrganismVector(const vector<Organism *> &organismVector);
+
+    void setGrid(const vector<vector<Organism *>> &grid);
+
     void DrawWorld();
     ~World();
     //void AddOrganism(Organism *organism, int row, int column);
     char ReturnSymbol(int row, int column);
-    void AddOrganism(int row, int column, char symbol);
-    void DeleteOrganism(int row, int column);
-    void AddNewOrganism(Organism *organism, int row, int column);
 
     void FillBoardWithOrganisms();
 
@@ -34,6 +39,14 @@ public:
     void AddRandomlyCharacter(Organism *organism, char symbol, const string &animalName);
 
     void AddRandomlyCharacter(Organism *organism);
+
+    void AddOrganism(Organism *organism, int row, int column);
+
+    Organism *GetOrganism(int row, int column);
+
+    void WholeGame();
+
+    void DeleteOrganism(Organism *organism, int row, int column);
 };
 
 

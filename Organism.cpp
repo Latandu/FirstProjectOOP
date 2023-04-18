@@ -3,11 +3,12 @@
 //
 
 #include "Organism.h"
-Organism::Organism(int strength, int initiative, Point point, World* world){
+Organism::Organism(int strength, int initiative, Point point, bool roundDone, int age){
     this->strength = strength;
     this->initiative = initiative;
     this->point = point;
-    this->world = world;
+    this->age = age;
+    this->roundDone = roundDone;
 }
 
 char Organism::Draw() {
@@ -51,3 +52,28 @@ const string &Organism::getAnimalName() const {
 void Organism::setAnimalName(const string &animalName) {
     Organism::animalName = animalName;
 }
+
+int Organism::getAge() const {
+    return age;
+}
+
+void Organism::setAge(int age) {
+    Organism::age = age;
+}
+
+bool Organism::isRoundDone() const {
+    return roundDone;
+}
+
+void Organism::setRoundDone(bool roundDone) {
+    Organism::roundDone = roundDone;
+}
+
+World *Organism::getWorld() const {
+    return world;
+}
+
+void Organism::setWorld(World *world) {
+    Organism::world = world;
+}
+
