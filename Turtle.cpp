@@ -10,3 +10,20 @@ Turtle::Turtle() {
     this->setSymbol(turtleSymbol);
     this->setAnimalName("Turtle");
 }
+
+void Turtle::Action() {
+    int randNum = std::rand() % 4;
+    if (randNum < 3) {
+        return;
+    }
+    Animal::Action();
+}
+bool Turtle::SpecialAttack(Organism* organism) {
+    if(this == organism){
+        return false;
+    }
+    if(organism->getStrength() > 5){
+        return true;
+    }
+    else return false;
+}

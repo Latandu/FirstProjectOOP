@@ -3,6 +3,7 @@
 //
 
 #include "Organism.h"
+
 Organism::Organism(int strength, int initiative, Point point, bool roundDone, int age){
     this->strength = strength;
     this->initiative = initiative;
@@ -76,4 +77,3 @@ World *Organism::getWorld() const {
 void Organism::setWorld(World *world) {
     Organism::world = world;
 }
-

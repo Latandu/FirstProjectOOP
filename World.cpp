@@ -16,6 +16,8 @@
 #include "Grass.h"
 #include "SowThistle.h"
 #include "Belladonna.h"
+#include "Logs.h"
+
 using namespace std;
 World::World(int rows, int columns){
     this->rows = rows;
@@ -50,13 +52,34 @@ char World::ReturnSymbol(int row, int column) {
     }
     return grid[row][column]->getSymbol();
 }
+int World::ReturnAge(int row, int column){
+    if(row < 0 || column < 0 || row >= rows || column >= columns){
+        return 0;
+    }
+    if(grid[row][column] == nullptr){
+        return 0;
+    }
+    return grid[row][column]->getAge();
+}
 Organism* World::GetOrganism(int row, int column){
+    if(row < 0 || column < 0 || row >= rows || column >= columns){
+        return nullptr;
+    }
     return grid[row][column];
+}
+int World::GetStrength(int row, int column){
+    if(row < 0 || column < 0 || row >= rows || column >= columns){
+        return 0;
+    }
+    if(grid[row][column] == nullptr){
+        return 0;
+    }
+    return grid[row][column]->getStrength();
 }
 void World::FillBoardWithOrganisms(){
     srand(time(nullptr));
     for(int i = 0; i < rows * columns / 100; i++) {
-        Organism* wolf = new Wolf;
+         Organism* wolf = new Wolf;
         Organism* sheep = new Sheep;
         Organism* turtle = new Turtle;
         Organism* fox = new Fox;
@@ -68,7 +91,7 @@ void World::FillBoardWithOrganisms(){
         Organism* sowThistle = new SowThistle;
         AddRandomlyCharacter(wolf);
         AddRandomlyCharacter(sheep);
-        AddRandomlyCharacter(turtle);
+       AddRandomlyCharacter(turtle);
         AddRandomlyCharacter(fox);
         AddRandomlyCharacter(antelope);
         AddRandomlyCharacter(belladonna);
@@ -77,6 +100,7 @@ void World::FillBoardWithOrganisms(){
         AddRandomlyCharacter(sosnowsky);
         AddRandomlyCharacter(sowThistle);
     }
+
 }
 
 void World::AddRandomlyCharacter(Organism* organism) {
@@ -154,9 +178,11 @@ void World::setOrganismVector(const vector<Organism *> &organismVector) {
 }
 void World::WholeGame(){
     FillBoardWithOrganisms();
-    while(numberOfRounds < 15){
+    while(numberOfRounds < 2){
         makeTurn();
         DrawWorld();
         std::cout << endl;
+        Logs::PrintLogs();
+        Logs::ClearLogs();
     }
 }

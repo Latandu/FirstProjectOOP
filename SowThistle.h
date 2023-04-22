@@ -7,6 +7,8 @@
 
 #include "Plant.h"
 class SowThistle : public Plant {
+protected:
+    void Action() override;
 public:
     SowThistle();
 };

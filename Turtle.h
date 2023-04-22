@@ -7,8 +7,13 @@
 
 #include "Animal.h"
 class Turtle : public Animal {
+protected:
+    void Action() override;
+    bool SpecialAttack(Organism *organism) override;
 public:
     Turtle();
+
+
 };
 
 

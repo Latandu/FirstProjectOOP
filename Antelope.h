@@ -7,6 +7,9 @@
 
 #include "Animal.h"
 class Antelope : public Animal {
+protected:
+    void Action() override;
+    bool SpecialAttack(Organism* organism) override;
 public:
     Antelope();
 };

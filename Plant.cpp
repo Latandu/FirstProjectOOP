@@ -4,25 +4,50 @@
 
 #include "Plant.h"
 #include "SowThistle.h"
+#include "Belladonna.h"
+#include "Sosnowsky.h"
+#include "Guarana.h"
+#include "Grass.h"
+#include "Logs.h"
+
 #define nullSpace '*'
 void Plant::Action() {
     int isNotFilled[4] = {0, 0, 0, 0};
     if(CheckForFilling(isNotFilled) != 0) {
         return;
     }
-    int randomProbability = (int)std::rand() % 10;
+    int randomProbability = (int)std::rand() % 20;
     if(randomProbability == 0){
         while(true){
             int randIndex = (int)std::rand() % 4;
             if(isNotFilled[randIndex]){
-                Organism* sowHog = new SowThistle;
-                AddNewOrganism(randIndex, point, sowHog);
+                AddNewOrganism(randIndex, point, CreateNewPlant(getSymbol()));
                 break;
             }
         }
     }
 }
-
+Organism* Plant::CreateNewPlant(char symbol){
+    if(symbol == 'B'){
+        Organism* belladonna = new class Belladonna;
+        return belladonna;
+    }
+    else if(symbol == 'S'){
+        Organism* sosnowsky = new class Sosnowsky;
+        return sosnowsky;
+    }
+    else if(symbol == 'G'){
+        Organism* guarana = new class Guarana;
+        return guarana;
+    } else if(symbol == 'R'){
+        Organism* grass = new class Grass;
+        return grass;
+    }else if (symbol == 'O'){
+        Organism* sowThistle = new class SowThistle;
+        return sowThistle;
+    }
+    return nullptr;
+}
 int Plant::CheckForFilling(int* isNotFilled) {
     int x = point.getX();
     int y = point.getY();
@@ -41,21 +66,25 @@ Point Plant::AddNewOrganism(int randIndex, Point point, Organism* organism){
         point.setX(point.getX()-1);
         point.setY(point.getY());
         world->AddOrganism(organism, point.getX(),point.getY());
+        Logs::AddComment("Created Organism at point" + std::to_string(point.getX()) +"," + std::to_string(point.getY()) + "\n");
         return point;
     } else if(randIndex == 1){
         point.setX(point.getX()+1);
         point.setY(point.getY());
         world->AddOrganism(organism, point.getX(),point.getY());
+        Logs::AddComment("Created Organism at point" + std::to_string(point.getX()) +"," + std::to_string(point.getY()) + "\n");
         return point;
     } else if(randIndex == 2){
         point.setX(point.getX());
         point.setY(point.getY() - 1);
         world->AddOrganism(organism, point.getX(),point.getY());
+        Logs::AddComment("Created Organism at point" + std::to_string(point.getX()) +"," + std::to_string(point.getY()) + "\n");
         return point;
     } else if(randIndex == 3){
         point.setX(point.getX());
         point.setY(point.getY() + 1);
         world->AddOrganism(organism, point.getX(),point.getY());
+        Logs::AddComment("Created Organism at point" + std::to_string(point.getX()) +"," + std::to_string(point.getY()) + "\n");
         return point;
     }
     return point;

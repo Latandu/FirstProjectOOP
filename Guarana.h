@@ -7,7 +7,7 @@
 
 #include "Plant.h"
 class Guarana : public Plant {
-
+    bool SpecialAttack(Organism* organism) override;
 public:
     Guarana();
 };

@@ -9,16 +9,14 @@
 class Plant : public Organism{
 protected:
     void Action() override;
+    bool SpecialAttack(Organism* organism) override {return false;};
     int Collision(Point& point) override{return 0;};
-private:
     int CheckForFilling(int *isNotFilled);
-    void AddNewOrganism(int randIndex);
+    Point AddNewOrganism(int randIndex, Point point, Organism *organism);
+    Organism *CreateNewPlant(char symbol);
 public:
     Plant() = default;
 
-    int CheckForFilling(int *isNotFilled, Point point);
-
-    Point AddNewOrganism(int randIndex, Point point, Organism *organism);
 };
 
 

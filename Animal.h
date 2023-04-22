@@ -9,26 +9,23 @@
 class Animal : public Organism{
 protected:
     void Action() override;
+    bool SpecialAttack(Organism* organism) override{return false;};
     int Collision(Point& point) override;
+    int CheckForFilling(int *isNotFilled, int change);
 
-    int CheckForFilling(int *isNotFilled, Point point);
-
-    Point ChangePositionOfOrganism(int randIndex, Point point);
-public:
-    Animal() = default;
-    int PositionAndCollision(int randIndex, Point &point, Point point1, int x, int y);
-
-    int CheckForFillingWithAnimals(int *isNotFilled);
 
     int CheckForFillingWithAnimals(int *isNotFilled, Point point);
-
-    int PositionAndCollision(Point &point, int x, int y);
 
     int PositionAndCollision(int x, int y);
 
     Point AddNewOrganism(int randIndex, Point point, Organism *organism);
+public:
+    Animal() = default;
 
-    Point ChangePositionOfOrganism(Organism *organism, int randIndex, Point pointAlfa);
+
+    Organism *CreateNewOrganism(char symbol);
+
+    Organism *CreateNewAnimal(char symbol);
 };
 
 

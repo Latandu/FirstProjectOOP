@@ -10,3 +10,13 @@ SowThistle::SowThistle(){
     this->setSymbol(sowthistleSymbol);
     this->setAnimalName("Sow Thistle");
 }
+
+void SowThistle::Action() {
+    int randNum = std::rand() % 10;
+    if (randNum == 0) {
+        for(int i = 0; i < 3; i++) {
+            Plant::Action();
+        }
+    } else Plant::Action();
+
+}

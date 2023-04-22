@@ -7,6 +7,8 @@
 
 #include "Plant.h"
 class Belladonna : public Plant{
+protected:
+    bool SpecialAttack(Organism* organism) override;
 public:
     Belladonna();
 };

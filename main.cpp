@@ -1,5 +1,6 @@
 #include <iostream>
 #include "World.h"
+#include "Logs.h"
 
 int main() {
     auto* world = new World(10,10);

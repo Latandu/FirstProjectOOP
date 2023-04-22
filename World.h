@@ -47,6 +47,10 @@ public:
     void WholeGame();
 
     void DeleteOrganism(Organism *organism, int row, int column);
+
+    int GetStrength(int row, int column);
+
+    int ReturnAge(int row, int column);
 };
 
 

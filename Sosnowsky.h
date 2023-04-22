@@ -7,6 +7,9 @@
 
 #include "Plant.h"
 class Sosnowsky : public Plant {
+    void Action() override;
+    bool SpecialAttack(Organism* organism) override;
+
 public:
     Sosnowsky();
 };

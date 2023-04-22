@@ -9,25 +9,23 @@
 #include <iostream>
 class World;
 class Organism {
+
 protected:
     int strength = 0;
     int initiative = 0;
     int age = 0;
     bool roundDone = false;
-public:
-protected:
     char symbol = '*';
     Point point;
     std::string animalName;
     virtual int Collision(Point& point) = 0;
     virtual char Draw();
 
-    const Point &getPoint() const;
-    void setStrength(int strength);
     void setInitiative(int initiative);
     void setSymbol(char symbol);
     void setAnimalName(const std::string &animalName);
     const std::string &getAnimalName() const;
+
 public:
     World* world{};
     Organism(int strength, int initiative, Point point, bool roundDone, int age);
@@ -39,7 +37,6 @@ public:
 
     Organism() = default;
     virtual char getSymbol() const;
-
     virtual ~Organism() = default;
 
     virtual void Action() = 0;
@@ -53,6 +50,12 @@ public:
     bool isRoundDone() const;
 
     void setPoint(int x, int y);
+
+    virtual bool SpecialAttack(Organism* organism) = 0;
+
+    void setStrength(int strength);
+
+    const Point &getPoint() const;
 };
 
 

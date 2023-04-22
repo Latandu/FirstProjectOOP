@@ -10,3 +10,13 @@ Belladonna::Belladonna() {
     this->setAnimalName("Belladonna");
     this->setSymbol(belladonnaSymbol);
 }
+
+bool Belladonna::SpecialAttack(Organism *organism) {
+    if(organism == this){
+        return false;
+    }
+    else{
+        world->DeleteOrganism(organism, organism->getPoint().getX(), organism->getPoint().getY());
+        return true;
+    }
+}
