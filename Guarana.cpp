@@ -3,6 +3,8 @@
 //
 
 #include "Guarana.h"
+#include "Logs.h"
+
 #define guaranaSymbol 'G'
 Guarana::Guarana() {
     this->setSymbol(guaranaSymbol);
@@ -12,7 +14,8 @@ Guarana::Guarana() {
 }
 
 bool Guarana::SpecialAttack(Organism *organism) {
-    organism->setStrength(5);
+    organism->setStrength(organism->getStrength() + 3);
+    Logs::AddComment("Added 3 strength to:" + organism->getAnimalName());
     Organism* newPositionOrganism = organism;
     world->DeleteOrganism(this,point.getX(), point.getY());
     world->DeleteOrganism(organism, organism->getPoint().getX(), organism->getPoint().getY());

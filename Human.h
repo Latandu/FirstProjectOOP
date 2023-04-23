@@ -9,7 +9,10 @@
 #include "Animal.h"
 
 class Human: public Animal{
-
+protected:
+    void Action() override;
+public:
+    Human();
 };
 
 

@@ -9,7 +9,7 @@ int Logs::loginumber = 0;
 
 void Logs::AddComment(string komentarz)
 {
-    if (loginumber < 20) {
+    if (loginumber < 15) {
         text += komentarz + "\n";
         loginumber++;
     }

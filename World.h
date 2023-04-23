@@ -7,7 +7,6 @@
 #include "Organism.h"
 #include <string>
 #include <vector>
-
 using namespace std;
 class Organism;
 class World {
@@ -51,6 +50,8 @@ public:
     int GetStrength(int row, int column);
 
     int ReturnAge(int row, int column);
+
+    bool AliveHuman = true;
 };
 
 

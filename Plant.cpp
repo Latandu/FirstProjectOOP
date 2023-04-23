@@ -66,25 +66,25 @@ Point Plant::AddNewOrganism(int randIndex, Point point, Organism* organism){
         point.setX(point.getX()-1);
         point.setY(point.getY());
         world->AddOrganism(organism, point.getX(),point.getY());
-        Logs::AddComment("Created Organism at point" + std::to_string(point.getX()) +"," + std::to_string(point.getY()) + "\n");
+        Logs::AddComment("Created Organism "+ this->getAnimalName()+"at point " + std::to_string(point.getX()) +"," + std::to_string(point.getY()));
         return point;
     } else if(randIndex == 1){
         point.setX(point.getX()+1);
         point.setY(point.getY());
         world->AddOrganism(organism, point.getX(),point.getY());
-        Logs::AddComment("Created Organism at point" + std::to_string(point.getX()) +"," + std::to_string(point.getY()) + "\n");
+        Logs::AddComment("Created Organism" + this->getAnimalName()+"at point " + std::to_string(point.getX()) +"," + std::to_string(point.getY()));
         return point;
     } else if(randIndex == 2){
         point.setX(point.getX());
         point.setY(point.getY() - 1);
         world->AddOrganism(organism, point.getX(),point.getY());
-        Logs::AddComment("Created Organism at point" + std::to_string(point.getX()) +"," + std::to_string(point.getY()) + "\n");
+        Logs::AddComment("Created Organism" + this->getAnimalName()+ "at point" + std::to_string(point.getX()) +"," + std::to_string(point.getY()));
         return point;
     } else if(randIndex == 3){
         point.setX(point.getX());
         point.setY(point.getY() + 1);
         world->AddOrganism(organism, point.getX(),point.getY());
-        Logs::AddComment("Created Organism at point" + std::to_string(point.getX()) +"," + std::to_string(point.getY()) + "\n");
+        Logs::AddComment("Created Organism" + this->getAnimalName()+ "at point" + std::to_string(point.getX()) +"," + std::to_string(point.getY()));
         return point;
     }
     return point;

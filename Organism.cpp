@@ -33,6 +33,13 @@ void Organism::setPoint(int x, int y) {
     this->point.setX(x);
     this->point.setY(y);
 }
+int Organism::getCoolDown() const {
+    return coolDown;
+}
+
+void Organism::setCoolDown(int coolDown) {
+    Organism::coolDown = coolDown;
+}
 
 int Organism::getStrength() const {
     return strength;

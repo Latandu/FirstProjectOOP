@@ -3,6 +3,8 @@
 //
 
 #include "Antelope.h"
+#include "Logs.h"
+
 #define antelopeSymbol 'A'
 Antelope::Antelope() {
     this->strength = 4;
@@ -10,7 +12,6 @@ Antelope::Antelope() {
     this->setSymbol(antelopeSymbol);
     this->setAnimalName("Antelope");
 }
-
 void Antelope::Action() {
     int isNotFilled[4] = {0, 0, 0, 0};
     if(CheckForFilling(isNotFilled, 2) != 0) {
@@ -54,6 +55,7 @@ bool Antelope::SpecialAttack(Organism *organism) {
         }
         Organism* newOrganismPosition = world->GetOrganism(point.getX(), point.getY());
         while(true){
+            Logs::AddComment("Antelope run away from attack");
             int randIndex = (int)std::rand() % 4;
             if(isNotFilled[randIndex]){
                 if(randIndex == 0){

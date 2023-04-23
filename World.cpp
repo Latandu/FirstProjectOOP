@@ -1,7 +1,6 @@
 //
 // Created by Latandu on 13/04/2023.
 //
-
 #include "World.h"
 #include <iostream>
 #include <algorithm>
@@ -17,6 +16,7 @@
 #include "SowThistle.h"
 #include "Belladonna.h"
 #include "Logs.h"
+#include "Human.h"
 
 using namespace std;
 World::World(int rows, int columns){
@@ -78,8 +78,10 @@ int World::GetStrength(int row, int column){
 }
 void World::FillBoardWithOrganisms(){
     srand(time(nullptr));
-    for(int i = 0; i < rows * columns / 100; i++) {
-         Organism* wolf = new Wolf;
+    Organism* human = new Human;
+    AddRandomlyCharacter(human);
+    for(int i = 0; i < rows * columns / 50; i++) {
+        Organism* wolf = new Wolf;
         Organism* sheep = new Sheep;
         Organism* turtle = new Turtle;
         Organism* fox = new Fox;
@@ -91,7 +93,7 @@ void World::FillBoardWithOrganisms(){
         Organism* sowThistle = new SowThistle;
         AddRandomlyCharacter(wolf);
         AddRandomlyCharacter(sheep);
-       AddRandomlyCharacter(turtle);
+        AddRandomlyCharacter(turtle);
         AddRandomlyCharacter(fox);
         AddRandomlyCharacter(antelope);
         AddRandomlyCharacter(belladonna);
@@ -99,6 +101,7 @@ void World::FillBoardWithOrganisms(){
         AddRandomlyCharacter(guarana);
         AddRandomlyCharacter(sosnowsky);
         AddRandomlyCharacter(sowThistle);
+
     }
 
 }
@@ -130,10 +133,10 @@ void World::AddOrganism(Organism* organism, int row, int column){
     organism->setPoint(row, column);
     grid[row][column] = organism;
     organismVector.push_back(organism);
-
 }
 
 void World::makeTurn() {
+    if(!AliveHuman) return;
     int organismVectorSize = (int)organismVector.size();
     while(organismVectorSize >= 0) {
         int highestInitiative = 0;
@@ -157,12 +160,25 @@ void World::makeTurn() {
             currentOrganism->Action();
         }
         organismVectorSize--;
+     //   if(!AliveHuman) break;
     }
     for (auto & i : organismVector) {
         i->setRoundDone(false);
         i->setAge(i->getAge() + 1);
+        if(i->getSymbol() == '@'){
+            if(i->getCoolDown() > 0){
+                i->setCoolDown(i->getCoolDown() - 1);
+            }
+            if(i->getStrength() > 5){
+                i->setStrength(i->getStrength() - 1);
+                if(i->getStrength() == 5){
+                    i->setCoolDown(5);
+                }
+            }
+        }
     }
     numberOfRounds++;
+
 }
 
 void World::setGrid(const vector<vector<Organism *>> &grid) {
@@ -172,17 +188,21 @@ void World::setGrid(const vector<vector<Organism *>> &grid) {
 const vector<Organism *> &World::getOrganismVector() const {
     return organismVector;
 }
-
 void World::setOrganismVector(const vector<Organism *> &organismVector) {
     World::organismVector = organismVector;
 }
 void World::WholeGame(){
     FillBoardWithOrganisms();
-    while(numberOfRounds < 2){
-        makeTurn();
-        DrawWorld();
-        std::cout << endl;
+    DrawWorld();
+    while(numberOfRounds < 100){
         Logs::PrintLogs();
         Logs::ClearLogs();
+        makeTurn();
+        system("cls");
+        DrawWorld();
+        if(!AliveHuman){
+            Logs::PrintLogs();
+            return;
+        }
     }
 }

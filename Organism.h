@@ -16,6 +16,7 @@ protected:
     int age = 0;
     bool roundDone = false;
     char symbol = '*';
+    int coolDown = 0;
     Point point;
     std::string animalName;
     virtual int Collision(Point& point) = 0;
@@ -24,11 +25,14 @@ protected:
     void setInitiative(int initiative);
     void setSymbol(char symbol);
     void setAnimalName(const std::string &animalName);
-    const std::string &getAnimalName() const;
+
 
 public:
     World* world{};
+    int getCoolDown() const;
+    void setCoolDown(int coolDown);
     Organism(int strength, int initiative, Point point, bool roundDone, int age);
+    const std::string &getAnimalName() const;
     World *getWorld() const;
 
     void setWorld(World *world);

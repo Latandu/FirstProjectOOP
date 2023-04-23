@@ -3,6 +3,8 @@
 //
 
 #include "Turtle.h"
+#include "Logs.h"
+
 #define turtleSymbol 'T'
 Turtle::Turtle() {
     this->strength = 2;
@@ -23,6 +25,7 @@ bool Turtle::SpecialAttack(Organism* organism) {
         return false;
     }
     if(organism->getStrength() > 5){
+        Logs::AddComment("Turtle avoided attack by " +organism->getAnimalName());
         return true;
     }
     else return false;
