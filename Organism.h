@@ -22,11 +22,6 @@ protected:
     virtual int Collision(Point& point) = 0;
     virtual char Draw();
 
-    void setInitiative(int initiative);
-    void setSymbol(char symbol);
-    void setAnimalName(const std::string &animalName);
-
-
 public:
     World* world{};
     int getCoolDown() const;
@@ -34,32 +29,27 @@ public:
     Organism(int strength, int initiative, Point point, bool roundDone, int age);
     const std::string &getAnimalName() const;
     World *getWorld() const;
-
     void setWorld(World *world);
     int getStrength() const;
     void setAge(int age);
-
     Organism() = default;
     virtual char getSymbol() const;
     virtual ~Organism() = default;
-
     virtual void Action() = 0;
-
     void setRoundDone(bool roundDone);
-
     int getAge() const;
-
     int getInitiative() const;
-
     bool isRoundDone() const;
-
     void setPoint(int x, int y);
-
     virtual bool SpecialAttack(Organism* organism) = 0;
-
     void setStrength(int strength);
-
     const Point &getPoint() const;
+
+    void setInitiative(int initiative);
+
+    void setSymbol(char symbol);
+
+    void setAnimalName(const std::string &animalName);
 };
 
 

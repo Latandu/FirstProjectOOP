@@ -8,7 +8,7 @@ SowThistle::SowThistle(){
     this->strength = 0;
     this->initiative = 0;
     this->setSymbol(sowthistleSymbol);
-    this->setAnimalName("Sow Thistle");
+    this->setAnimalName("SowThistle");
 }
 
 void SowThistle::Action() {

@@ -56,9 +56,19 @@ void Human::Action() {
                 if(coolDown == 0){
                     this->setStrength(10);
                     Logs::AddComment("Activated human superpower - set strength to 10");
-                    cout << "Activated " << endl;
+                    cout << "Activated superPower" << endl;
                 }
                 break;
+            case 0x73:
+                this->setRoundDone(false);
+                world->saveFile = true;
+                cout << "File will be saved after the round finishes";
+                break;
+            case 0x1b:
+                delete world;
+                cout << "Exited game" << endl;
+                system("pause");
+                exit(0);
             default:
                 cout << "Cannot go there " << endl;
                 break;

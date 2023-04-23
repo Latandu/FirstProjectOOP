@@ -4,6 +4,8 @@
 #include "World.h"
 #include <iostream>
 #include <algorithm>
+#include <fstream>
+
 #define nullSpace '*'
 #include "Wolf.h"
 #include "Sheep.h"
@@ -80,7 +82,7 @@ void World::FillBoardWithOrganisms(){
     srand(time(nullptr));
     Organism* human = new Human;
     AddRandomlyCharacter(human);
-    for(int i = 0; i < rows * columns / 50; i++) {
+    for(int i = 0; i < rows / 5; i++) {
         Organism* wolf = new Wolf;
         Organism* sheep = new Sheep;
         Organism* turtle = new Turtle;
@@ -160,7 +162,6 @@ void World::makeTurn() {
             currentOrganism->Action();
         }
         organismVectorSize--;
-     //   if(!AliveHuman) break;
     }
     for (auto & i : organismVector) {
         i->setRoundDone(false);
@@ -180,6 +181,97 @@ void World::makeTurn() {
     numberOfRounds++;
 
 }
+void World::SaveToFile(){
+    std::ofstream ofs("data.txt");
+    ofs << columns << " ";
+    ofs << rows << "\n";
+    ofs << numberOfRounds << " ";
+    ofs << AliveHuman << " ";
+    for(auto& i: organismVector){
+        ofs << i->getAge() << " ";
+        ofs << i->getStrength() << " ";
+        ofs << i->getSymbol() << " ";
+        ofs << i->getCoolDown() << " ";
+        ofs << i->getPoint().getX() << " ";
+        ofs << i->getPoint().getY() << " ";
+        ofs << i->getAnimalName() << " ";
+        ofs << i->getInitiative() << " ";
+        ofs << i->isRoundDone() << " ";
+    }
+    ofs.close();
+}
+void World::ReadFromFile(){
+    std::ifstream ifs("data.txt");
+    if (ifs.is_open()) {
+    ifs >> rows;
+    ifs >> columns;
+    ifs >> numberOfRounds;
+    ifs >> AliveHuman;
+    this->grid.resize(rows,vector<Organism*>(columns, nullptr));
+    int age, strength, coolDown, initiative, pointX, pointY;
+    char symbol;
+    bool roundDone;
+    std::string animalName;
+    while (ifs >> age >> strength >> symbol >> coolDown >> pointX >> pointY >> animalName >> initiative >> roundDone) {
+        InitializeOrganism(age, strength, coolDown, initiative, pointX, pointY, symbol, roundDone, animalName);
+    }
+    ifs.close();
+    } else {
+        cout << "Failed to retrieve from file! Exiting..." << endl;
+        system("pause");
+        exit(1);
+    }
+}
+
+void World::InitializeOrganism(int age, int strength, int coolDown, int initiative, int pointX, int pointY, char symbol,
+                               bool roundDone, const string &animalName){
+    Organism* organism = nullptr;
+    if(symbol == 'W'){
+        organism = new class Wolf;
+    }
+    else if(symbol == 'A'){
+        organism = new class Antelope;
+    }
+    else if(symbol == 'E'){
+        organism = new class Sheep;
+    }
+    else if(symbol == 'T'){
+        organism = new class Turtle;
+    }
+    else if(symbol == 'F'){
+        organism = new class Fox;
+    }
+    else if(symbol == 'B'){
+        organism = new class Belladonna;
+    }
+    else if(symbol == 'S'){
+        organism = new class Sosnowsky;
+    }
+    else if(symbol == 'G'){
+        organism = new class Guarana;
+    }
+    else if(symbol == 'R'){
+        organism = new class Grass;
+    }
+    else if (symbol == 'O'){
+        organism = new class SowThistle;
+    }
+    else if(symbol == '@'){
+        organism = new class Human;
+    }
+    if(organism == nullptr) return;
+    organism ->setAge(age);
+    organism ->setStrength(strength);
+    organism ->setInitiative(initiative);
+    organism ->setSymbol(symbol);
+    organism ->setCoolDown(coolDown);
+    organism ->setPoint(pointX, pointY);
+    organism ->setRoundDone(roundDone);
+    organism ->setAnimalName(animalName);
+    organism ->setWorld(this);
+    grid[pointX][pointY] = organism ;
+    organismVector.push_back(organism);
+}
 
 void World::setGrid(const vector<vector<Organism *>> &grid) {
     World::grid = grid;
@@ -192,17 +284,24 @@ void World::setOrganismVector(const vector<Organism *> &organismVector) {
     World::organismVector = organismVector;
 }
 void World::WholeGame(){
-    FillBoardWithOrganisms();
     DrawWorld();
-    while(numberOfRounds < 100){
+    while(AliveHuman){
         Logs::PrintLogs();
         Logs::ClearLogs();
         makeTurn();
         system("cls");
         DrawWorld();
+        if(saveFile){
+            SaveToFile();
+            cout << "Saved file to data.txt" << endl;
+        }
         if(!AliveHuman){
             Logs::PrintLogs();
             return;
         }
     }
+}
+
+World::World() {
+
 }

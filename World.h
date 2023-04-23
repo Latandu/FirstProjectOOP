@@ -17,8 +17,10 @@ protected:
     Organism* organisms;
     vector<Organism*> organismVector;
 public:
+    bool saveFile = false;
     int numberOfRounds = 0;
     World(int rows, int columns);
+    World();
     void makeTurn();
 
     const vector<Organism *> &getOrganismVector() const;
@@ -52,6 +54,13 @@ public:
     int ReturnAge(int row, int column);
 
     bool AliveHuman = true;
+
+    void SaveToFile();
+
+    void ReadFromFile();
+
+    void InitializeOrganism(int age, int strength, int coolDown, int initiative, int pointX, int pointY, char symbol,
+                            bool roundDone, const string &animalName);
 };
 
 
