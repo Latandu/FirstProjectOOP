@@ -70,7 +70,6 @@ void Human::Action() {
                 system("pause");
                 exit(0);
             default:
-                cout << "Cannot go there " << endl;
                 break;
         }
     }

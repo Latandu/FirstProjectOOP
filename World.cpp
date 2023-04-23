@@ -82,7 +82,7 @@ void World::FillBoardWithOrganisms(){
     srand(time(nullptr));
     Organism* human = new Human;
     AddRandomlyCharacter(human);
-    for(int i = 0; i < rows / 5; i++) {
+    for(int i = 0; i < rows * columns / 50; i++) {
         Organism* wolf = new Wolf;
         Organism* sheep = new Sheep;
         Organism* turtle = new Turtle;

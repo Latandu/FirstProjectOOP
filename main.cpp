@@ -13,6 +13,7 @@ int main() {
             world2->ReadFromFile();
             world2->WholeGame();
             system("pause");
+            delete world2;
             return 0;
         case 0x6e:
             system("cls");
@@ -20,11 +21,13 @@ int main() {
         default:
             cout << "Invalid key" << endl;
     }
-    auto* world = new World(20,20);
+    cout << "Input size (after space)";
+    int row, column;
+    cin >> row >> column;
+    auto* world = new World(row,column);
     world->FillBoardWithOrganisms();
     world->WholeGame();
     delete world;
-    delete world2;
     system("pause");
     return 0;
 }
